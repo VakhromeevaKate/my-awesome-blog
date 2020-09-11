@@ -10,18 +10,13 @@ export default new Router({
     {
       path: '/',
       name: 'Ping',
-      component: Ping,
+      component: Ping
     },
     {
       path: '/posts',
       name: 'Posts',
-      component: Posts,
-    },
-    {
-      path: '/ping',
-      name: 'Ping',
-      component: Ping,
-    },
+      component: Posts
+    }
   ],
-  mode: 'history',
+  mode: 'history'
 });

@@ -1,6 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-from datetime import date
+from datetime import date, datetime
 
 # configuration
 DEBUG = True
@@ -40,12 +40,21 @@ def ping_pong():
     return jsonify('pong!')
 
 
-@app.route('/posts', methods=['GET'])
+@app.route('/posts', methods=['GET', 'POST'])
 def all_posts():
-    return jsonify({
-        'status': 'success',
-        'posts': POSTS
-    })
+    response_object = {'status': 'success'}
+    if request.method == 'POST':
+        post_data = request.get_json()
+        POSTS.append({
+            'title': post_data.get('title'),
+            'author': post_data.get('author'),
+            'date': datetime.now(),
+            'text': post_data.get('text')
+        })
+        response_object['message'] = 'Post added!'
+    else:
+        response_object['posts'] = POSTS
+    return jsonify(response_object)
 
 
 if __name__ == '__main__':

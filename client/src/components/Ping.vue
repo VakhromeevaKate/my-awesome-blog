@@ -9,13 +9,13 @@ import axios from 'axios';
 
 export default {
   name: 'Ping',
-  data() {
+  data () {
     return {
-      msg: '',
+      msg: ''
     };
   },
   methods: {
-    getMessage() {
+    getMessage () {
       const path = 'http://localhost:5000/ping';
       axios.get(path)
         .then((res) => {
@@ -27,7 +27,7 @@ export default {
         });
     },
   },
-  created() {
+  created () {
     this.getMessage();
   },
 };
